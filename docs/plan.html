@@ -1,0 +1,94 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>План сайту Макса · ДЗ1</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+:root{
+  --bg:#fafaf9; --surface:#ffffff; --border:#e7e5e4; --text:#1c1917; --muted:#57534e; --soft:#f5f5f4;
+  --accent:#c2410c; --accent-bg:#fff7ed; --ok:#15803d; --ok-bg:#f0fdf4;
+  --sans:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1c1917; --surface:#262321; --border:#3a3633; --text:#f5f5f4; --muted:#a8a29e; --soft:#2e2a27;
+  --accent:#fb923c; --accent-bg:#3a2516; --ok:#4ade80; --ok-bg:#16301f; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1c1917; --surface:#262321; --border:#3a3633; --text:#f5f5f4; --muted:#a8a29e; --soft:#2e2a27;
+  --accent:#fb923c; --accent-bg:#3a2516; --ok:#4ade80; --ok-bg:#16301f; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font:400 16px/1.6 var(--sans);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 72px}
+.doc{max-width:760px;margin-inline:auto;display:flex;flex-direction:column;gap:36px}
+h1{font-size:clamp(1.6rem,4vw,2.1rem);line-height:1.2;margin:0;text-wrap:balance}
+h2{font-size:1.25rem;line-height:1.3;margin:0;display:flex;gap:10px;align-items:baseline}
+h2 span{color:var(--accent);font-variant-numeric:tabular-nums}
+h3{font-size:1rem;margin:0}
+p{margin:0}
+.meta{color:var(--muted);font-size:.95rem;margin-top:6px}
+section{display:flex;flex-direction:column;gap:14px}
+.pos{background:var(--accent-bg);border-left:4px solid var(--accent);padding:18px 20px;font-size:1.15rem;line-height:1.5;font-weight:500}
+.pages{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pages li{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.pages li p{color:var(--muted);font-size:.95rem}
+.blocks{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;border:1px solid var(--border);border-radius:8px;background:var(--surface);overflow:hidden}
+.blocks li{display:grid;grid-template-columns:36px minmax(0,1fr);gap:12px;padding:14px 16px;border-top:1px solid var(--border)}
+.blocks li:first-child{border-top:0}
+.blocks .n{width:26px;height:26px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-size:.85rem;font-weight:600;color:var(--muted)}
+.blocks p{color:var(--muted);font-size:.95rem;margin-top:3px}
+.blocks b{color:var(--text);font-weight:600}
+.qs{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;counter-reset:q}
+.qs li{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;counter-increment:q}
+.qs .qt{font-weight:500}
+.qs .qt::before{content:counter(q) ". ";color:var(--muted)}
+.qs .a{background:var(--ok-bg);border-radius:6px;padding:10px 12px;font-size:.95rem}
+.qs .a b{color:var(--ok)}
+.qs .none{color:var(--muted);font-style:italic;font-size:.95rem}
+@media (max-width:560px){.pages{grid-template-columns:1fr}}
+</style>
+
+<article class="doc">
+  <header>
+    <h1>План сайту-портфоліо (чернетка)</h1>
+    <p class="meta">Максим Гармаш · дизайнер, AI-автоматизація процесів</p>
+  </header>
+
+  <section>
+    <h2><span>1.</span>Позиціонування</h2>
+    <p class="pos">Автоматизую рутинні процеси медіа й невеликих команд з AI та агентами, щоб люди ставили задачі й ухвалювали рішення, а рутину робили агенти.</p>
+  </section>
+
+  <section>
+    <h2><span>2.</span>Сторінки</h2>
+    <ul class="pages">
+      <li><h3>Головна</h3><p>За кілька секунд пояснює, з якими процесами я допомагаю і кому, і веде до кейсів та контакту.</p></li>
+      <li><h3>Кейси</h3><p>Усі роботи однаковими картками, щоб редакція чи команда знайшла задачу, схожу на свою.</p></li>
+      <li><h3>Кейс (окрема сторінка на кожну роботу)</h3><p>Що робили руками, що я автоматизував, що з цього вийшло і що не спрацювало.</p></li>
+      <li><h3>Виступи</h3><p>Теми лекцій і воркшопів і де я вже виступав, для організаторів подій і тренінгів.</p></li>
+      <li><h3>Про мене</h3><p>Шлях від друку і медіа до автоматизації, щоб було видно, звідки я знаю редакційні процеси зсередини.</p></li>
+      <li><h3>Контакти</h3><p>Пошта й LinkedIn і що написати в першому листі, щоб я швидко зрозумів задачу.</p></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span>3.</span>Блоки головної сторінки</h2>
+    <ol class="blocks">
+      <li><span class="n">1</span><div><h3>Перший екран</h3><p>Позиціонування одним реченням, кнопка «Розказати про задачу» і три обкладинки кейсів знизу. <b>Розказую:</b> кому і з якою рутиною допомагаю.</p></div></li>
+      <li><span class="n">2</span><div><h3>Кейси</h3><p>Три картки: тренінг для редакцій ЦЕДЕМ першим, далі система бренду в коді і Figma-плагін. <b>Розказую:</b> на кожній одним рядком, яку рутину прибрала робота.</p></div></li>
+      <li><span class="n">3</span><div><h3>Як я працюю</h3><p>Три кроки: розбираю ваш процес і шукаю, де в ньому рутина, збираю пілот з агентами на одному процесі, навчаю команду і передаю з інструкцією. <b>Розказую:</b> що команда отримує на кожному кроці і що рішення лишаються за людьми.</p></div></li>
+      <li><span class="n">4</span><div><h3>Виступи і навчання</h3><p>Лекція для журналістів ЦЕДЕМ, мітап GoIT, курси в GoIT і Neoversity. <b>Розказую:</b> що можу провести лекцію чи воркшоп для команди, а не лише зробити роботу за неї.</p></div></li>
+      <li><span class="n">5</span><div><h3>Про мене коротко</h3><p>Понад 7 років у дизайні, з них 4 роки дизайнером у Ґвара Медіа, зараз GoIT. <b>Розказую:</b> чому я розумію, як працює редакція, і чесно, що нормально кодити не вмію, але збираю робочі інструменти з AI.</p></div></li>
+      <li><span class="n">6</span><div><h3>Контакт</h3><p>Пошта і підказка, що написати: який процес з'їдає час і скільки людей у ньому. <b>Розказую:</b> можна прийти з проблемою, без готового ТЗ.</p></div></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2><span>4.</span>Питання до мене</h2>
+    <ol class="qs">
+      <li><p class="qt">Чи можна називати клієнтів, яких ти консультував, і показувати їхні процеси?</p><p class="a"><b>Моя відповідь:</b> ні, без їхнього дозволу не називаю. Робочі проєкти теж під NDA. Тому в кейсах публічний тренінг ЦЕДЕМ і мої власні інструменти, а консультації згадую лише як формат роботи.</p></li>
+      <li><p class="qt">Яку роботу показати першою?</p><p class="a"><b>Моя відповідь:</b> тренінг ЦЕДЕМ. Це прямо про автоматизацію редакцій, і після нього мене запросили бути постійним тренером.</p></li>
+      <li><p class="qt">Чи є відгуки клієнтів або учасників?</p><p class="a"><b>Моя відповідь:</b> окремих відгуків немає. Блок відгуків на головній не робимо, замість нього блок «Виступи і навчання».</p></li>
+      <li><p class="qt">Яким каналом тобі зручніше отримувати запити?</p><p class="a"><b>Моя відповідь:</b> пошта, на неї відповідаю найшвидше. LinkedIn другим каналом. Форми на сайті поки не треба.</p></li>
+      <li><p class="qt">Який формат і вартість консультацій: разова сесія, серія чи проєкт?</p><p class="none">Відповіді поки немає.</p></li>
+    </ol>
+  </section>
+</article>
+
+</body></html>
