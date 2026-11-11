@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./.env*)",
+      "Read(**/.env*)"
+    ],
+    "ask": [
+      "Bash(vercel *--prod*)",
+      "Bash(vc *--prod*)",
+      "Bash(npx vercel*--prod*)",
+      "Bash(vercel *--target*production*)",
+      "Bash(vc *--target*production*)",
+      "Bash(npx vercel*--target*production*)",
+      "Bash(vercel promote*)",
+      "Bash(vercel rollback*)",
+      "Bash(vercel redeploy*)",
+      "Bash(vercel remove*)",
+      "Bash(vercel alias*)",
+      "Bash(vercel domains*)",
+      "Bash(vercel env rm*)",
+      "Bash(vercel tokens*)",
+      "Bash(vercel buy*)",
+      "Bash(vercel api*)",
+      "Bash(git push*)",
+      "Bash(git -C * push*)",
+      "Bash(gh pr merge*)"
+    ]
+  }
+}

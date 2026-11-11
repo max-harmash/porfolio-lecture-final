@@ -1,3 +1,122 @@
 @import "tailwindcss";
 
-/* Токени дизайн-системи додаємо тут, у @theme. Стартової теми й темної схеми немає. */
+/*
+  Дизайн-токени сайту. Значення взяті з макета «HW-1 Example» у Figma
+  (кадр Home — first screen): у файлі немає змінних, тож токени збираємо тут.
+  Тема одна, світла. Кутів не заокруглюємо: усе прямокутне.
+*/
+
+@theme {
+  /* ---------- Кольори ---------- */
+  /* Прибираємо стандартну палітру Tailwind, лишаємо тільки свої кольори. */
+  --color-*: initial;
+
+  --color-paper: #f4f3ef; /* фон сторінки */
+  --color-ink: #121212; /* основний текст, темні кнопки, рамки */
+  --color-muted: #6b6862; /* підзаголовки, описи, підписи секцій */
+  --color-accent: #ff4f1a; /* курсор у лого, номери, мітки, рукописна нотатка */
+  --color-line: rgb(218 215 208 / 0.7); /* лінії фонової сітки */
+  --color-placeholder: #cfcbc3; /* фон під зображенням, поки воно вантажиться */
+  --color-white: #ffffff; /* текст на темній кнопці */
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* ---------- Шрифти ---------- */
+  /* Самі гарнітури підключає next/font у layout.tsx (див. @theme inline нижче). */
+
+  /* ---------- Типографічна шкала ---------- */
+  /* Головний заголовок: 54px на десктопі, плавно менший на вузьких екранах. */
+  --text-display: clamp(2.25rem, 1.35rem + 2.8vw, 3.375rem);
+  --text-display--line-height: 1.12;
+  --text-display--letter-spacing: -0.05em;
+  --text-display--font-weight: 700;
+
+  /* Лід під заголовком, 21px. */
+  --text-lead: 1.3125rem;
+  --text-lead--line-height: 1.5;
+
+  /* Звичайний текст і опис картки, 15px. */
+  --text-body: 0.9375rem;
+  --text-body--line-height: 1.5;
+
+  /* Логотип maxharmash, 20px. */
+  --text-logo: 1.25rem;
+  --text-logo--line-height: 1.2;
+  --text-logo--letter-spacing: -0.05em;
+  --text-logo--font-weight: 700;
+
+  /* Назва кейсу в картці, 14px жирний. */
+  --text-title: 0.875rem;
+  --text-title--line-height: 1.25;
+  --text-title--letter-spacing: -0.02em;
+  --text-title--font-weight: 700;
+
+  /* Текст кнопок, 14px великими. */
+  --text-button: 0.875rem;
+  --text-button--line-height: 1.25;
+  --text-button--letter-spacing: 0.02em;
+  --text-button--font-weight: 500;
+
+  /* Меню, мітки й підписи секцій, 13px великими. */
+  --text-label: 0.8125rem;
+  --text-label--line-height: 1.25;
+  --text-label--letter-spacing: 0.04em;
+  --text-label--font-weight: 500;
+
+  /* Номери 01, 02, 03, 12px. */
+  --text-index: 0.75rem;
+  --text-index--line-height: 1.2;
+  --text-index--font-weight: 500;
+
+  /* Рукописна нотатка, 30px. */
+  --text-hand: 1.875rem;
+  --text-hand--line-height: 1.1;
+  --text-hand--font-weight: 700;
+
+  /* ---------- Простір і сітка ---------- */
+  /* Базовий крок Tailwind (4px) лишаємо. Модуль сітки макета — 54px. */
+  --spacing-module: 54px; /* p-module, gap-module */
+  --spacing-gutter: 108px; /* бокове поле сторінки на десктопі: 2 модулі */
+  --container-page: 1224px; /* max-w-page: ширина контенту між полями */
+
+  /* Рамки: кнопки — border-2, мітка з номером — border-thin (нижче). */
+}
+
+/* Тонка рамка мітки з номером, 1.5px. */
+@utility border-thin {
+  border-style: solid;
+  border-width: 1.5px;
+}
+
+/* next/font створює змінні --font-martian, --font-geologica, --font-caveat. */
+@theme inline {
+  --font-sans: var(--font-geologica), system-ui, sans-serif; /* текст */
+  --font-mono: var(--font-martian), ui-monospace, monospace; /* заголовки, меню, кнопки, мітки */
+  --font-hand: var(--font-caveat), cursive; /* рукописні нотатки */
+}
+
+/* Фонова сітка 54×54 з макета: bg-grid. */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, var(--color-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-line) 1px, transparent 1px);
+  background-size: var(--spacing-module) var(--spacing-module);
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+  }
+}
