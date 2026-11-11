@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
+import { useId, type ReactNode } from "react";
 
 export type ButtonVariant = "primary" | "secondary";
 export type ButtonSize = "md" | "lg";
@@ -7,77 +7,94 @@ export type ButtonSize = "md" | "lg";
 export interface ButtonProps {
   /** Текст кнопки. Пишіть звичайно: великими літерами його робить сам компонент. */
   children: ReactNode;
-  /** `primary` — темна заливка, головна дія екрана. `secondary` — рамка без заливки, другорядна дія. */
+  /** `primary` — заливка accent, головна дія екрана. `secondary` — без заливки, з межею ink-muted. */
   variant?: ButtonVariant;
-  /** `md` — компактна, для меню («Написати»). `lg` — велика, для першого екрана й закликів до дії. */
+  /** `md` — звичайна (меню, форми). `lg` — велика (перший екран, заклики до дії). */
   size?: ButtonSize;
   /** Адреса. Якщо задана, компонент стає посиланням (next/link), а не кнопкою. */
   href?: string;
   /** Тип кнопки у формі. Для посилання не діє. */
   type?: "button" | "submit";
-  /** Вимкнений стан: сірі кольори, не натискається, посилання не переходить. */
+  /** Вимкнений стан: кнопка не натискається, посилання не переходить, але фокус клавіатурою лишається. */
   disabled?: boolean;
-  /** Обробник натискання. */
+  /** Пояснення, чому кнопка вимкнена. Показується під кнопкою і зачитується скрінрідером. */
+  disabledReason?: string;
+  /** Обробник натискання. У вимкненому стані не викликається. */
   onClick?: () => void;
 }
 
 const base =
-  "inline-flex items-center justify-center gap-2 border-2 font-mono uppercase whitespace-nowrap transition-colors " +
+  "inline-flex items-center justify-center gap-2 rounded-control border-2 font-mono uppercase whitespace-nowrap transition-colors " +
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink";
 
 const sizes: Record<ButtonSize, string> = {
-  md: "px-4.5 py-2.5 text-label",
-  lg: "px-6 py-3.5 text-button",
+  md: "px-4 py-2 text-label",
+  lg: "px-6 py-3 text-button",
 };
 
-const variants: Record<ButtonVariant, { enabled: string; disabled: string }> = {
-  primary: {
-    enabled: "border-ink bg-ink text-white hover:bg-paper hover:text-ink",
-    disabled: "border-muted bg-muted text-white",
-  },
-  secondary: {
-    enabled: "border-ink bg-transparent text-ink hover:bg-ink hover:text-white",
-    disabled: "border-muted bg-transparent text-muted",
-  },
+const variants: Record<ButtonVariant, string> = {
+  primary: "cursor-pointer border-accent bg-accent text-ink hover:border-ink hover:bg-ink hover:text-canvas",
+  secondary: "cursor-pointer border-ink-muted bg-transparent text-ink hover:border-ink hover:bg-surface",
 };
+
+// Однаковий для обох варіантів: пунктирна межа line, текст ink-muted (5 : 1 на canvas).
+const disabledStyle = "cursor-not-allowed border-dashed border-line bg-transparent text-ink-muted";
 
 /**
- * Кнопка сайту. Прямокутна, моноширинний шрифт великими літерами, рамка 2px.
- * Вміє бути кнопкою або посиланням (з `href`).
+ * Кнопка дизайн-системи. Моноширинний шрифт великими літерами, межа 2px, кути `rounded-control`.
+ * З `href` стає посиланням. Вимкнена кнопка лишається у фокусі клавіатури й може показати причину.
  */
 export function Button({
   children,
   variant = "primary",
-  size = "lg",
+  size = "md",
   href,
   type = "button",
   disabled = false,
+  disabledReason,
   onClick,
 }: ButtonProps) {
-  const state = disabled
-    ? `${variants[variant].disabled} cursor-not-allowed`
-    : `${variants[variant].enabled} cursor-pointer`;
-  const className = `${base} ${sizes[size]} ${state}`;
+  const reasonId = useId();
+  const className = `${base} ${sizes[size]} ${disabled ? disabledStyle : variants[variant]}`;
+  const describedBy = disabled && disabledReason ? reasonId : undefined;
 
+  let control: ReactNode;
   if (href && !disabled) {
-    return (
+    control = (
       <Link href={href} className={className} onClick={onClick}>
         {children}
       </Link>
     );
-  }
-
-  if (href && disabled) {
-    return (
-      <span className={className} aria-disabled="true">
+  } else if (href) {
+    // Вимкнене посилання: без href, але у фокусі, з поясненням.
+    control = (
+      <a role="link" aria-disabled="true" tabIndex={0} aria-describedby={describedBy} className={className}>
         {children}
-      </span>
+      </a>
+    );
+  } else {
+    // aria-disabled замість disabled: кнопка лишається у фокусі, тож причину можна прочитати.
+    control = (
+      <button
+        type={disabled ? "button" : type}
+        aria-disabled={disabled || undefined}
+        aria-describedby={describedBy}
+        className={className}
+        onClick={disabled ? undefined : onClick}
+      >
+        {children}
+      </button>
     );
   }
 
+  if (!describedBy) return control;
+
   return (
-    <button type={type} className={className} disabled={disabled} onClick={onClick}>
-      {children}
-    </button>
+    <span className="inline-flex flex-col items-start gap-2">
+      {control}
+      <span id={reasonId} className="font-sans text-caption text-ink-muted">
+        {disabledReason}
+      </span>
+    </span>
   );
 }

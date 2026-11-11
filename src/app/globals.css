@@ -3,89 +3,87 @@
 /*
   Дизайн-токени сайту. Значення взяті з макета «HW-1 Example» у Figma
   (кадр Home — first screen): у файлі немає змінних, тож токени збираємо тут.
-  Тема одна, світла. Кутів не заокруглюємо: усе прямокутне.
+  Назви — за роллю, не за кольором. Тема одна, світла.
+  Відступи окремо не оголошуємо: у компонентах беремо лише кроки
+  8, 12, 16, 24, 32 px (у класах 2, 3, 4, 6, 8: p-4, gap-6).
+  Перегляд усіх токенів: Storybook, розділ Foundations/Tokens.
 */
 
 @theme {
   /* ---------- Кольори ---------- */
-  /* Прибираємо стандартну палітру Tailwind, лишаємо тільки свої кольори. */
-  --color-*: initial;
+  --color-*: initial; /* стандартну палітру Tailwind скидаємо */
 
-  --color-paper: #f4f3ef; /* фон сторінки */
-  --color-ink: #121212; /* основний текст, темні кнопки, рамки */
-  --color-muted: #6b6862; /* підзаголовки, описи, підписи секцій */
-  --color-accent: #ff4f1a; /* курсор у лого, номери, мітки, рукописна нотатка */
-  --color-line: rgb(218 215 208 / 0.7); /* лінії фонової сітки */
-  --color-placeholder: #cfcbc3; /* фон під зображенням, поки воно вантажиться */
-  --color-white: #ffffff; /* текст на темній кнопці */
-  --color-transparent: transparent;
-  --color-current: currentColor;
+  --color-canvas: #f4f3ef; /* фон сторінки */
+  --color-surface: #ffffff; /* поверхня: поля форми, картки з фоном */
+  --color-line: #e2dfd9; /* розділювачі, рамки карток, лінії сітки (декор, не межа поля) */
+  --color-accent: #ff4f1a; /* акцент: основна кнопка, курсор лого, номери */
+  --color-ink: #121212; /* основний текст, контури фокусу */
+  --color-ink-muted: #6b6862; /* приглушений текст; межа поля й другорядної кнопки */
+  --color-danger: #b3261e; /* помилка: текст і межа поля */
 
   /* ---------- Шрифти ---------- */
-  /* Самі гарнітури підключає next/font у layout.tsx (див. @theme inline нижче). */
+  /* Гарнітури підключає next/font у src/app/fonts.ts (див. @theme inline нижче). */
 
-  /* ---------- Типографічна шкала ---------- */
-  /* Головний заголовок: 54px на десктопі, плавно менший на вузьких екранах. */
-  --text-display: clamp(2.25rem, 1.35rem + 2.8vw, 3.375rem);
+  /* ---------- Розміри тексту ---------- */
+  /* Стандартні розміри скидаємо. Кожен розмір несе висоту рядка,
+     а де роль однозначна — ще трекінг і жирність. */
+  --text-*: initial;
+
+  --text-display: clamp(2.25rem, 1.35rem + 2.8vw, 3.375rem); /* головний заголовок, 54px на десктопі */
   --text-display--line-height: 1.12;
   --text-display--letter-spacing: -0.05em;
   --text-display--font-weight: 700;
 
-  /* Лід під заголовком, 21px. */
-  --text-lead: 1.3125rem;
+  --text-lead: 1.3125rem; /* лід під заголовком, 21px */
   --text-lead--line-height: 1.5;
 
-  /* Звичайний текст і опис картки, 15px. */
-  --text-body: 0.9375rem;
+  --text-heading: 1.25rem; /* логотип і заголовки секцій, 20px */
+  --text-heading--line-height: 1.2;
+  --text-heading--letter-spacing: -0.05em;
+  --text-heading--font-weight: 700;
+
+  --text-body: 0.9375rem; /* основний текст, опис картки, поле форми, 15px */
   --text-body--line-height: 1.5;
 
-  /* Логотип maxharmash, 20px. */
-  --text-logo: 1.25rem;
-  --text-logo--line-height: 1.2;
-  --text-logo--letter-spacing: -0.05em;
-  --text-logo--font-weight: 700;
-
-  /* Назва кейсу в картці, 14px жирний. */
-  --text-title: 0.875rem;
+  --text-title: 0.875rem; /* назва в картці, 14px жирний */
   --text-title--line-height: 1.25;
   --text-title--letter-spacing: -0.02em;
   --text-title--font-weight: 700;
 
-  /* Текст кнопок, 14px великими. */
-  --text-button: 0.875rem;
+  --text-button: 0.875rem; /* текст кнопки, 14px великими */
   --text-button--line-height: 1.25;
   --text-button--letter-spacing: 0.02em;
   --text-button--font-weight: 500;
 
-  /* Меню, мітки й підписи секцій, 13px великими. */
-  --text-label: 0.8125rem;
+  --text-label: 0.8125rem; /* меню, мітки, підписи секцій і полів, 13px */
   --text-label--line-height: 1.25;
   --text-label--letter-spacing: 0.04em;
   --text-label--font-weight: 500;
 
-  /* Номери 01, 02, 03, 12px. */
-  --text-index: 0.75rem;
-  --text-index--line-height: 1.2;
-  --text-index--font-weight: 500;
+  --text-caption: 0.75rem; /* номери 01–03, підказки, 12px */
+  --text-caption--line-height: 1.35;
+  --text-caption--font-weight: 500;
 
-  /* Рукописна нотатка, 30px. */
-  --text-hand: 1.875rem;
+  --text-hand: 1.875rem; /* рукописна нотатка, 30px */
   --text-hand--line-height: 1.1;
   --text-hand--font-weight: 700;
 
-  /* ---------- Простір і сітка ---------- */
-  /* Базовий крок Tailwind (4px) лишаємо. Модуль сітки макета — 54px. */
-  --spacing-module: 54px; /* p-module, gap-module */
-  --spacing-gutter: 108px; /* бокове поле сторінки на десктопі: 2 модулі */
-  --container-page: 1224px; /* max-w-page: ширина контенту між полями */
+  /* ---------- Радіуси ---------- */
+  /* У макеті кути прямі, тому обидва радіуси нульові. Токени лишаємо,
+     щоб змінити заокруглення в одному місці. */
+  --radius-*: initial;
+  --radius-control: 0px; /* кнопки й поля: rounded-control */
+  --radius-card: 0px; /* картки: rounded-card */
 
-  /* Рамки: кнопки — border-2, мітка з номером — border-thin (нижче). */
-}
+  /* ---------- Пропорції ---------- */
+  --aspect-cover: 392 / 150; /* обкладинка картки роботи: aspect-cover */
+  --aspect-portrait: 332 / 403; /* фото на першому екрані: aspect-portrait */
 
-/* Тонка рамка мітки з номером, 1.5px. */
-@utility border-thin {
-  border-style: solid;
-  border-width: 1.5px;
+  /* ---------- Розкладка сторінки ---------- */
+  /* Лише для сторінок, не для компонентів: у компонентах відступи 8–32px.
+     Набору 8–32px не вистачає, щоб відтворити макет 1440px. */
+  --container-page: 1224px; /* ширина контенту, max-w-page; на 1440px дає поля по 108px */
+  --spacing-section: 72px; /* відстань між великими блоками: gap-section, pt-section */
 }
 
 /* next/font створює змінні --font-martian, --font-geologica, --font-caveat. */
@@ -95,12 +93,18 @@
   --font-hand: var(--font-caveat), cursive; /* рукописні нотатки */
 }
 
-/* Фонова сітка 54×54 з макета: bg-grid. */
+/* Фонова сітка 54×54 з макета: bg-grid. Крок сітки — лише для фону, не відступ. */
 @utility bg-grid {
   background-image:
     linear-gradient(to right, var(--color-line) 1px, transparent 1px),
     linear-gradient(to bottom, var(--color-line) 1px, transparent 1px);
-  background-size: var(--spacing-module) var(--spacing-module);
+  background-size: 54px 54px;
+}
+
+/* Тонка рамка мітки з номером, 1.5px. */
+@utility border-thin {
+  border-style: solid;
+  border-width: 1.5px;
 }
 
 @layer base {
@@ -109,7 +113,7 @@
   }
 
   body {
-    background-color: var(--color-paper);
+    background-color: var(--color-canvas);
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
@@ -117,6 +121,6 @@
 
   ::selection {
     background-color: var(--color-accent);
-    color: var(--color-white);
+    color: var(--color-ink);
   }
 }

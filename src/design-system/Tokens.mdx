@@ -1,0 +1,135 @@
+import { Meta, ColorPalette, ColorItem, Typeset } from "@storybook/addon-docs/blocks";
+
+<Meta title="Foundations/Tokens" />
+
+# Токени
+
+Єдине джерело значень — блок `@theme` у `src/app/globals.css`. Тут лише показ: значення беруться зі змінних CSS, тож сторінка завжди збігається з кодом. Назви токенів — за роллю, не за кольором. Стандартні кольори, розміри тексту й радіуси Tailwind скинуті: доступне тільки те, що є нижче.
+
+## Кольори
+
+<ColorPalette>
+  <ColorItem title="canvas" subtitle="Фон сторінки · bg-canvas" colors={{ canvas: "var(--color-canvas)" }} />
+  <ColorItem title="surface" subtitle="Поверхня: поля форми, картки з фоном · bg-surface" colors={{ surface: "var(--color-surface)" }} />
+  <ColorItem title="line" subtitle="Розділювачі, рамки карток, лінії сітки. Декор, не межа поля · border-line" colors={{ line: "var(--color-line)" }} />
+  <ColorItem title="accent" subtitle="Основна кнопка, курсор лого, номери. Текст на ньому — тільки ink · bg-accent" colors={{ accent: "var(--color-accent)" }} />
+  <ColorItem title="ink" subtitle="Основний текст, контур фокусу · text-ink, outline-ink" colors={{ ink: "var(--color-ink)" }} />
+  <ColorItem title="ink-muted" subtitle="Приглушений текст, межа поля й другорядної кнопки · text-ink-muted, border-ink-muted" colors={{ "ink-muted": "var(--color-ink-muted)" }} />
+  <ColorItem title="danger" subtitle="Помилка: текст і межа поля · text-danger, border-danger" colors={{ danger: "var(--color-danger)" }} />
+</ColorPalette>
+
+### Контраст пар, які використовують компоненти
+
+<div className="sb-unstyled">
+  <table className="w-full border-collapse font-sans text-body">
+    <thead>
+      <tr className="border-b-2 border-ink text-left">
+        <th className="py-2 pr-4">Пара</th>
+        <th className="py-2 pr-4">Контраст</th>
+        <th className="py-2">Висновок</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr className="border-b border-line"><td className="py-2 pr-4">ink на canvas</td><td className="py-2 pr-4">16.9 : 1</td><td className="py-2">будь-який текст</td></tr>
+      <tr className="border-b border-line"><td className="py-2 pr-4">ink-muted на canvas</td><td className="py-2 pr-4">5.0 : 1</td><td className="py-2">будь-який текст, межі полів</td></tr>
+      <tr className="border-b border-line"><td className="py-2 pr-4">ink на accent</td><td className="py-2 pr-4">5.7 : 1</td><td className="py-2">текст основної кнопки</td></tr>
+      <tr className="border-b border-line"><td className="py-2 pr-4">білий на accent</td><td className="py-2 pr-4">3.3 : 1</td><td className="py-2">не для тексту кнопки</td></tr>
+      <tr className="border-b border-line"><td className="py-2 pr-4">accent на canvas</td><td className="py-2 pr-4">3.0 : 1</td><td className="py-2">великий текст і декор; дрібний текст не проходить 4.5 : 1</td></tr>
+      <tr className="border-b border-line"><td className="py-2 pr-4">danger на canvas</td><td className="py-2 pr-4">5.9 : 1</td><td className="py-2">текст помилки</td></tr>
+      <tr className="border-b border-line"><td className="py-2 pr-4">ink-muted на line</td><td className="py-2 pr-4">4.2 : 1</td><td className="py-2">не поєднувати для тексту</td></tr>
+      <tr><td className="py-2 pr-4">line на canvas</td><td className="py-2 pr-4">1.2 : 1</td><td className="py-2">лише декор, не межа поля</td></tr>
+    </tbody>
+  </table>
+</div>
+
+## Шрифти
+
+`font-mono` — Martian Mono: заголовки, меню, кнопки, мітки.
+
+<Typeset fontFamily="var(--font-mono)" fontWeight={700} fontSizes={["var(--text-display)", "var(--text-heading)", "var(--text-title)"]} sampleText="Автоматизую рутинні процеси" />
+
+`font-sans` — Geologica: основний текст.
+
+<Typeset fontFamily="var(--font-sans)" fontSizes={["var(--text-lead)", "var(--text-body)"]} sampleText="Щоб люди ставили задачі й ухвалювали рішення" />
+
+`font-hand` — Caveat: рукописні нотатки.
+
+<Typeset fontFamily="var(--font-hand)" fontWeight={700} fontSizes={["var(--text-hand)"]} sampleText="це головне!" />
+
+## Розміри тексту
+
+Кожен розмір уже містить висоту рядка, а де роль однозначна — ще трекінг і жирність. `text-button` і `text-label` пишуться з `uppercase`.
+
+<div className="sb-unstyled">
+  <table className="w-full border-collapse">
+    <thead>
+      <tr className="border-b-2 border-ink text-left font-sans text-body">
+        <th className="py-2 pr-4">Клас</th>
+        <th className="py-2 pr-4">Роль</th>
+        <th className="py-2">Зразок</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr className="border-b border-line align-baseline"><td className="py-3 pr-4 font-mono text-caption">text-display</td><td className="py-3 pr-4 font-sans text-body text-ink-muted">головний заголовок, 54px на десктопі</td><td className="py-3 font-mono text-display">Автоматизую</td></tr>
+      <tr className="border-b border-line align-baseline"><td className="py-3 pr-4 font-mono text-caption">text-lead</td><td className="py-3 pr-4 font-sans text-body text-ink-muted">лід під заголовком, 21px</td><td className="py-3 font-sans text-lead text-ink-muted">Щоб люди ставили задачі</td></tr>
+      <tr className="border-b border-line align-baseline"><td className="py-3 pr-4 font-mono text-caption">text-heading</td><td className="py-3 pr-4 font-sans text-body text-ink-muted">логотип, заголовки секцій, 20px</td><td className="py-3 font-mono text-heading">maxharmash</td></tr>
+      <tr className="border-b border-line align-baseline"><td className="py-3 pr-4 font-mono text-caption">text-body</td><td className="py-3 pr-4 font-sans text-body text-ink-muted">основний текст, опис картки, поле, 15px</td><td className="py-3 font-sans text-body">як прибрати рутину з роботи журналіста</td></tr>
+      <tr className="border-b border-line align-baseline"><td className="py-3 pr-4 font-mono text-caption">text-title</td><td className="py-3 pr-4 font-sans text-body text-ink-muted">назва в картці, 14px</td><td className="py-3 font-mono text-title">Тренінг для редакцій ЦЕДЕМ</td></tr>
+      <tr className="border-b border-line align-baseline"><td className="py-3 pr-4 font-mono text-caption">text-button</td><td className="py-3 pr-4 font-sans text-body text-ink-muted">текст кнопки, 14px</td><td className="py-3 font-mono text-button uppercase">Розказати про задачу →</td></tr>
+      <tr className="border-b border-line align-baseline"><td className="py-3 pr-4 font-mono text-caption">text-label</td><td className="py-3 pr-4 font-sans text-body text-ink-muted">меню, мітки, підписи полів, 13px</td><td className="py-3 font-mono text-label uppercase">Кейси · Виступи</td></tr>
+      <tr className="border-b border-line align-baseline"><td className="py-3 pr-4 font-mono text-caption">text-caption</td><td className="py-3 pr-4 font-sans text-body text-ink-muted">номери, підказки, 12px</td><td className="py-3 font-mono text-caption">01 02 03</td></tr>
+      <tr className="align-baseline"><td className="py-3 pr-4 font-mono text-caption">text-hand</td><td className="py-3 pr-4 font-sans text-body text-ink-muted">рукописна нотатка, 30px</td><td className="py-3 font-hand text-hand text-accent">це головне!</td></tr>
+    </tbody>
+  </table>
+</div>
+
+## Радіуси
+
+У макеті кути прямі, тому обидва радіуси дорівнюють 0. Токени є, щоб змінити заокруглення в одному місці.
+
+<div className="sb-unstyled">
+  <div className="flex flex-wrap gap-6 font-sans text-body">
+    <div className="flex flex-col gap-2">
+      <div className="h-16 w-32 rounded-control border-2 border-ink-muted bg-surface" />
+      <span className="font-mono text-caption">rounded-control</span>
+      <span className="text-ink-muted">кнопки й поля</span>
+    </div>
+    <div className="flex flex-col gap-2">
+      <div className="h-16 w-32 rounded-card border border-line bg-surface" />
+      <span className="font-mono text-caption">rounded-card</span>
+      <span className="text-ink-muted">картки</span>
+    </div>
+  </div>
+</div>
+
+## Відступи
+
+Окремих токенів немає: у компонентах беремо лише кроки зі стандартної шкали Tailwind.
+
+<div className="sb-unstyled">
+  <table className="border-collapse font-sans text-body">
+    <thead>
+      <tr className="border-b-2 border-ink text-left">
+        <th className="py-2 pr-6">Число в класі</th>
+        <th className="py-2 pr-6">Пікселі</th>
+        <th className="py-2">Розмір</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr className="border-b border-line"><td className="py-2 pr-6 font-mono text-caption">2 (p-2, gap-2)</td><td className="py-2 pr-6">8</td><td className="py-2"><div className="h-4 w-2 bg-accent" /></td></tr>
+      <tr className="border-b border-line"><td className="py-2 pr-6 font-mono text-caption">3</td><td className="py-2 pr-6">12</td><td className="py-2"><div className="h-4 w-3 bg-accent" /></td></tr>
+      <tr className="border-b border-line"><td className="py-2 pr-6 font-mono text-caption">4</td><td className="py-2 pr-6">16</td><td className="py-2"><div className="h-4 w-4 bg-accent" /></td></tr>
+      <tr className="border-b border-line"><td className="py-2 pr-6 font-mono text-caption">6</td><td className="py-2 pr-6">24</td><td className="py-2"><div className="h-4 w-6 bg-accent" /></td></tr>
+      <tr><td className="py-2 pr-6 font-mono text-caption">8</td><td className="py-2 pr-6">32</td><td className="py-2"><div className="h-4 w-8 bg-accent" /></td></tr>
+    </tbody>
+  </table>
+</div>
+
+## Інше
+
+- `aspect-cover` — пропорція обкладинки картки роботи (392 : 150 з макета).
+- `aspect-portrait` — пропорція фото на першому екрані (332 : 403).
+- `max-w-page` — ширина контенту сторінки, 1224px. Лише для розкладки сторінок.
+- `gap-section`, `pt-section` — відстань між великими блоками сторінки, 72px. Лише для розкладки сторінок, у компонентах не використовуйте.
+- `bg-grid` — фонова сітка 54 × 54 з макета.
+- `border-thin` — тонка рамка 1.5px для мітки з номером.
