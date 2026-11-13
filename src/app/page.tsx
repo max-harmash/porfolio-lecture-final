@@ -106,6 +106,16 @@ export default function Home() {
             </div>
           </section>
         </main>
+
+        <footer className="border-t-2 border-line py-6">
+          {/* Звичайне посилання, не next/link: Storybook — окремі статичні файли, не сторінка Next. */}
+          <a
+            href="/storybook"
+            className="rounded-control font-mono text-label uppercase text-ink-muted underline decoration-2 underline-offset-8 hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+          >
+            Дизайн-система сайту в Storybook →
+          </a>
+        </footer>
       </div>
     </div>
   );
